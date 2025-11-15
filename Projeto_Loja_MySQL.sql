@@ -1,0 +1,118 @@
+-- Criação das tabelas
+
+CREATE TABLE CLIENTE (
+    codigo   INT AUTO_INCREMENT PRIMARY KEY,
+    nome     VARCHAR(50) NOT NULL,
+    endereco VARCHAR(30) NOT NULL,
+    cidade   VARCHAR(25) NOT NULL,
+    estado   VARCHAR(2)  NOT NULL,
+    telefone VARCHAR(15) NOT NULL
+);
+
+CREATE TABLE FORNECEDOR (
+    codigo   INT AUTO_INCREMENT PRIMARY KEY,
+    nome     VARCHAR(50) NOT NULL,
+    cnpj     VARCHAR(18) NOT NULL,
+    endereco VARCHAR(20),
+    cidade   VARCHAR(30),
+    estado   VARCHAR(2),
+    telefone VARCHAR(15)
+);
+
+CREATE TABLE PRODUTO (
+    codigo  INT AUTO_INCREMENT PRIMARY KEY,
+    nome    VARCHAR(50)   NOT NULL,
+    preco   NUMERIC(6,2)  NOT NULL,
+    estoque INT
+);
+
+CREATE TABLE VENDA (
+    numeroDaNotaFiscal INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    dataVenda          DATE,
+    valorVenda         NUMERIC(6,2) NOT NULL
+);
+
+-- Informações da Tabela CLIENTE
+
+INSERT INTO CLIENTE (nome,endereco,cidade,estado,telefone)
+VALUES ('Renato da Silva','Rua Zé Ramalho, 390','Bom Despacho','MG','(37)9889-2345');
+
+INSERT INTO CLIENTE (codigo,nome,endereco,cidade,estado,telefone)
+VALUES (2,'Maria Pereira','Rua Renato Russo, 1289','Martinho Campos','MG','(37)9998-2345');
+
+INSERT INTO CLIENTE (codigo,nome,endereco,cidade,estado,telefone)
+VALUES (3,'Gustavo Silva','Rua Ramones, 56','Bom Despacho','MG','(37)99234-9900');
+
+INSERT INTO CLIENTE (codigo,nome,endereco,cidade,estado,telefone)
+VALUES (4,'Paula Lima','Rua Capital Inicial, 990','Campinas','SP','(19)99873-0099');
+
+INSERT INTO CLIENTE (codigo,nome,endereco,cidade,estado,telefone)
+VALUES (5,'Júlia Ferreira','Rua Barão Vermelho, 2345','Niterói','RJ','(21)99765-0987');
+
+-- Informações da Tabela FORNECEDOR
+
+INSERT INTO FORNECEDOR (nome,endereco,cidade,estado,cnpj,telefone)
+VALUES ('Sai de Baixo LTDA','Rua da Bahia, 234','Bom Despacho','MG','XX.XXX.XXX/0001-44','(37)9989-1250');
+
+INSERT INTO FORNECEDOR (codigo,nome,endereco,cidade,estado,cnpj,telefone)
+VALUES (2,'Tabajara Brasil LTDA','Rua da Lagoa, 456','Martinho Campos','MG','XX.XXX.XXX/0010-77','(37)9998-4523');
+
+INSERT INTO FORNECEDOR (codigo,nome,endereco,cidade,estado,cnpj,telefone)
+VALUES (3,'Harmoniza','Rua do Sul, 567','Bom Despacho','MG','XX.XXX.XXX/0035-65','(37)99234-0099');
+
+INSERT INTO FORNECEDOR (codigo,nome,endereco,cidade,estado,cnpj,telefone)
+VALUES (4,'MYhome','Rua do Norte, 1234','Campinas','SP','XX.XXX.XXX/0066-23','(19)99173-1090');
+
+INSERT INTO FORNECEDOR (codigo,nome,endereco,cidade,estado,cnpj,telefone)
+VALUES (5,'Aprovve','Rua do Leste, 6789','Niterói','RJ','XX.XXX.XXX/0055-42','(21)99865-8721');
+
+-- Informações da Tabela PRODUTO
+
+INSERT INTO PRODUTO (nome,preco,estoque)
+VALUES ('Mouse',       23.89, 100);
+
+INSERT INTO PRODUTO (nome,preco,estoque)
+VALUES ('Monitor',    156.89, 20);
+
+INSERT INTO PRODUTO (nome,preco,estoque)
+VALUES ('Teclado',     17.90, 50);
+
+INSERT INTO PRODUTO (nome,preco,estoque)
+VALUES ('Estabilizador', 67.90, 30);
+
+INSERT INTO PRODUTO (nome,preco,estoque)
+VALUES ('Impressora', 247.99, 10);
+
+-- Informações da Tabela VENDA
+
+INSERT INTO VENDA (numeroDaNotaFiscal,dataVenda,valorVenda)
+VALUES (687439,'2009-06-07',100.00);
+
+INSERT INTO VENDA (numeroDaNotaFiscal,dataVenda,valorVenda)
+VALUES (778920,'2016-12-12',60.00);
+
+INSERT INTO VENDA (numeroDaNotaFiscal,dataVenda,valorVenda)
+VALUES (689755,'2015-10-18',345.00);
+
+INSERT INTO VENDA (numeroDaNotaFiscal,dataVenda,valorVenda)
+VALUES (336154,'2017-05-07',290.00);
+
+INSERT INTO VENDA (numeroDaNotaFiscal,dataVenda,valorVenda)
+VALUES (258876,'2014-04-02',110.00);
+
+-- Consultas de exemplo
+
+SELECT * FROM CLIENTE WHERE estado = 'MG';
+
+SELECT * FROM CLIENTE WHERE telefone LIKE '(37)%';
+
+SELECT * FROM FORNECEDOR WHERE cidade = 'Bom Despacho';
+
+SELECT codigo, nome FROM PRODUTO
+WHERE estoque > 20 AND preco > 50.00;
+
+SELECT * FROM VENDA
+WHERE YEAR(dataVenda) >= 2016 AND valorVenda > 200.00;
+
+SELECT * FROM PRODUTO
+WHERE preco >= 50 AND estoque > 20 AND estoque < 50;
